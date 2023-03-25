@@ -1,0 +1,36 @@
+version: "3.9"
+services:
+  mysqldb:
+    container_name: mysqldb
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: eldany1234
+      MYSQL_DATABASE: banco
+    volumes:
+      - data-mysql:/var/lib/
+    networks:
+      - neoris
+  ms_bank:
+    container_name: ms_bank
+    #para contruir imagen desde docker hub
+    #image: daniel0223/bank-ms_bank validar repo
+    #image: img_ms_bank si esta en nuestro local
+    #construir imagen desde local
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    ports:
+      - 8080:8080
+    env_file: .env
+    networks:
+      - neoris
+    depends_on:
+      - mysqldb
+    restart: always
+volumes:
+  data-mysql:
+    name: mysql
+networks:
+  neoris:
