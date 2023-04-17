@@ -28,5 +28,4 @@ public class MsEmailConfig {
         return message.get(type);
     }
 
-
 }
