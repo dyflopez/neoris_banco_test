@@ -1,23 +1,21 @@
 package com.neoris.bank.datos;
 
-import com.neoris.bank.dto.ClienteDTO;
-import com.neoris.bank.model.ClienteEntity;
+import com.neoris.bank.model.ClientEntity;
 
-import javax.swing.text.html.parser.Entity;
 import java.util.Date;
 import java.util.List;
 
 public class DatosClienteEntity {
 
-    public static ClienteEntity getClienteEntity (String nombre ,
-                                         String identificacion,
-                                         String password,
-                                         int edad,
-                                         String direccion,
-                                                  long id
+    public static ClientEntity getClienteEntity (String nombre ,
+                                                 String identificacion,
+                                                 String password,
+                                                 int edad,
+                                                 String direccion,
+                                                 long id
     ){
 
-        ClienteEntity clienteEntity = new ClienteEntity();
+        ClientEntity clienteEntity = new ClientEntity();
 
         clienteEntity.setPersonaId(id);
         clienteEntity.setDireccion(direccion);
@@ -33,9 +31,9 @@ public class DatosClienteEntity {
         return clienteEntity;
     }
 
-    public static List<ClienteEntity> getListClientes(ClienteEntity cliente){
+    public static List<ClientEntity> getListClientes(ClientEntity cliente){
 
-        List<ClienteEntity> clienteDTOList = List.of(cliente);
+        List<ClientEntity> clienteDTOList = List.of(cliente);
 
         return clienteDTOList;
 

@@ -1,6 +1,6 @@
 package com.neoris.bank.datos;
 
-import com.neoris.bank.model.ClienteEntity;
+import com.neoris.bank.model.ClientEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -8,11 +8,11 @@ import java.util.List;
 
 public class DatosClienteControllerTest {
 
-    public static ResponseEntity listarClientes(List<ClienteEntity> clienteEntities){
+    public static ResponseEntity listarClientes(List<ClientEntity> clienteEntities){
         return ResponseEntity.ok(clienteEntities);
     }
 
-    public static ResponseEntity getCliente(ClienteEntity cliente){
+    public static ResponseEntity getCliente(ClientEntity cliente){
         return ResponseEntity.ok(cliente);
     }
 

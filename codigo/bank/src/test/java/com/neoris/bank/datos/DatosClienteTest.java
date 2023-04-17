@@ -1,23 +1,20 @@
 package com.neoris.bank.datos;
 
-import com.neoris.bank.dto.ClienteDTO;
-import com.neoris.bank.model.ClienteEntity;
+import com.neoris.bank.dto.ClientDTO;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class DatosClienteTest {
 
-    public static ClienteDTO clienteDTO (String nombre ,
-                                         String identificacion,
-                                         String password,
-                                         int edad,
-                                         String direccion
+    public static ClientDTO clienteDTO (String nombre ,
+                                        String identificacion,
+                                        String password,
+                                        int edad,
+                                        String direccion
     ){
 
-        ClienteDTO clienteDTO = new ClienteDTO();
+        ClientDTO clienteDTO = new ClientDTO();
 
         clienteDTO.setDireccion(direccion);
         clienteDTO.setNombre(nombre);
@@ -32,9 +29,9 @@ public class DatosClienteTest {
         return clienteDTO;
     }
 
-    public static List<ClienteDTO> getListClientes(ClienteDTO dto){
+    public static List<ClientDTO> getListClientes(ClientDTO dto){
 
-        List<ClienteDTO> clienteDTOList = List.of(dto);
+        List<ClientDTO> clienteDTOList = List.of(dto);
 
         return clienteDTOList;
 

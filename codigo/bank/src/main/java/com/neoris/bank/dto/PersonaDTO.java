@@ -1,7 +1,12 @@
 package com.neoris.bank.dto;
 
-import lombok.*;
+import lombok.Setter;
+import lombok.Getter;
+import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.*;
 import java.util.Date;
 
 @Setter
@@ -11,18 +16,31 @@ import java.util.Date;
 @NoArgsConstructor
 public class PersonaDTO {
 
-    private String nombre;
 
-    private String genero;
+    @NotBlank
+    @NotEmpty(message = "El nombre no puede estar vacio")
+    private String name;
 
-    private Date fechaNacimiento;
+    @NotBlank
+    @NotEmpty(message = "Genero vacio")
+    private String gender;
 
-    private int edad;
 
-    private String identificacion;
+    private Date birthdate;
 
-    private String direccion;
+    @NotEmpty
+    private String identification;
 
-    private String telefono;
+    @NotEmpty
+    private String address;
+
+    @Min(7)
+    @NotEmpty
+    private String phone;
+
+    @NotNull
+    @NotEmpty
+    @Email
+    private  String email;
 
 }

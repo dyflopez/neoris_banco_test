@@ -3,9 +3,9 @@ package com.neoris.bank.service.impl;
 import com.neoris.bank.configs.ExceptionConfigs;
 import com.neoris.bank.datos.DatosClienteEntity;
 import com.neoris.bank.datos.DatosClienteTest;
-import com.neoris.bank.dto.ClienteDTO;
+import com.neoris.bank.dto.ClientDTO;
 import com.neoris.bank.exception.MiExcepcionPerzonalizada;
-import com.neoris.bank.repository.ClienteRepository;
+import com.neoris.bank.repository.ClientRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,10 +26,10 @@ import static org.mockito.Mockito.*;
 class ClienteServiceImplTest {
 
     @Autowired
-    ClienteServiceImpl clienteService;
+    ClientServiceImpl clienteService;
 
     @MockBean
-    ClienteRepository clienteRepository;
+    ClientRepository clienteRepository;
 
     @MockBean
     ExceptionConfigs exceptionConfigs;
@@ -44,7 +44,7 @@ class ClienteServiceImplTest {
                         "19A",
                         1l);
 
-        ClienteDTO clienteDTO = DatosClienteTest
+        ClientDTO clienteDTO = DatosClienteTest
                 .clienteDTO("Daniel",
                         "1030",
                         "1122",
@@ -53,11 +53,11 @@ class ClienteServiceImplTest {
                 );
 
         when(clienteRepository.save(any())).thenReturn(clienteEntiry);
-        when(clienteRepository.findByIdentificacion(anyString())).thenReturn(Optional.empty());
+        when(clienteRepository.findByIdentification(anyString())).thenReturn(Optional.empty());
 
-        ResponseEntity response =   clienteService.crearCliente(clienteDTO);
+        ResponseEntity response =   clienteService.creatClient(clienteDTO);
         verify(clienteRepository, times(1)).save(any());
-        verify(clienteRepository, times(1)).findByIdentificacion(any());
+        verify(clienteRepository, times(1)).findByIdentification(any());
         assertEquals(201,response.getStatusCode().value());
 
     }
@@ -71,7 +71,7 @@ class ClienteServiceImplTest {
                         "19A",
                         1l);
 
-        ClienteDTO clienteDTO = DatosClienteTest
+        ClientDTO clienteDTO = DatosClienteTest
                 .clienteDTO("Daniel",
                         "1030",
                         "1122",
@@ -79,16 +79,16 @@ class ClienteServiceImplTest {
                         "19A"
                 );
 
-        when(clienteRepository.findByIdentificacion(anyString())).thenReturn(Optional.of(clienteEntiry));
+        when(clienteRepository.findByIdentification(anyString())).thenReturn(Optional.of(clienteEntiry));
 
 
         Exception exception =assertThrows(MiExcepcionPerzonalizada.class,()->{
-            clienteService.crearCliente(clienteDTO);
+            clienteService.creatClient(clienteDTO);
         });
 
         assertNotNull(exception);
         assertEquals(exception.getMessage(),"la persona ya existe");
-        verify(clienteRepository, times(1)).findByIdentificacion(any());
+        verify(clienteRepository, times(1)).findByIdentification(any());
 
     }
 

@@ -1,8 +1,12 @@
 package com.neoris.bank.dto;
 
 
-import lombok.*;
-
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Setter
 @Getter
@@ -20,12 +24,12 @@ public class ReporteMovmientosDTO {
 
     private String tipo;
 
-    private int saldoInicial;
+    private long saldoInicial;
 
     private boolean estado;
 
-    private int movimiento;
+    private long movimiento;
 
-    private int saldoDisponible;
+    private long saldoDisponible;
 
 }

@@ -1,37 +1,36 @@
 package com.neoris.bank.mappers;
 
-import com.neoris.bank.dto.ClienteDTO;
-import com.neoris.bank.dto.CuentaDTO;
-import com.neoris.bank.model.ClienteEntity;
-import com.neoris.bank.model.CuentaEntity;
+import com.neoris.bank.dto.AccountDTO;
+import com.neoris.bank.model.ClientEntity;
+import com.neoris.bank.model.AccountEntity;
 
 public class CuentaMapper {
 
     private CuentaMapper (){
     }
 
-    public static CuentaEntity getCuentaDtoToCuentaEntiry(CuentaDTO cuentaDTO, ClienteEntity clienteEntity) {
+    public static AccountEntity getAccountDtoToAccountEntity(AccountDTO accountDTO, ClientEntity clientEntity) {
 
-        return  CuentaEntity
+        return  AccountEntity
                 .builder()
-                .numeroCuenta(cuentaDTO.getNumeroCuenta())
-                .tipoCuenta(cuentaDTO.getTipoCuenta())
-                .saldoInicial(cuentaDTO.getSaldoInicial())
-                .estado(cuentaDTO.getEstado())
-                .cliente(clienteEntity)
+                .accountNumber(accountDTO.getAccountNumber())
+                .accountType(accountDTO.getAccountType())
+                .initialBalance(accountDTO.getInitialBalance())
+                .status(accountDTO.getStatus())
+                .client(clientEntity)
                 .build();
 
     }
 
-    public static CuentaEntity getCuentaEntity(CuentaDTO cuentaDTO, CuentaEntity clienteEntity) {
+    public static AccountEntity getCuentaEntity(AccountDTO cuentaDTO, AccountEntity clienteEntity) {
 
         return  clienteEntity
                 .builder()
-                .numeroCuenta(cuentaDTO.getNumeroCuenta())
-                .tipoCuenta(cuentaDTO.getTipoCuenta())
-                .saldoInicial(cuentaDTO.getSaldoInicial())
-                .estado(cuentaDTO.getEstado())
-                .cliente(clienteEntity.getCliente())
+                .accountNumber(cuentaDTO.getAccountNumber())
+                .accountType(cuentaDTO.getAccountType())
+                .initialBalance(cuentaDTO.getInitialBalance())
+                .status(cuentaDTO.getStatus())
+                .client(clienteEntity.getClient())
                 .build();
 
     }

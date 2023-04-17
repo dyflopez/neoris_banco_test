@@ -5,9 +5,9 @@ import com.neoris.bank.BankApplication;
 import com.neoris.bank.datos.DatosClienteControllerTest;
 import com.neoris.bank.datos.DatosClienteEntity;
 import com.neoris.bank.datos.DatosClienteTest;
-import com.neoris.bank.dto.ClienteDTO;
-import com.neoris.bank.model.ClienteEntity;
-import com.neoris.bank.service.IClienteService;
+import com.neoris.bank.dto.ClientDTO;
+import com.neoris.bank.model.ClientEntity;
+import com.neoris.bank.service.IClientService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,7 @@ class ClienteControllerTest {
     private MockMvc mvc;
 
     @MockBean
-    IClienteService iClienteService;
+    IClientService iClienteService;
 
     ObjectMapper objectMapper;
 
@@ -46,10 +46,10 @@ class ClienteControllerTest {
     }
 
     @Test
-    void createUSer() throws Exception {
+    void createClientTest() throws Exception {
 
-        ClienteDTO clienteDTO = DatosClienteTest.clienteDTO("Daniel", "1030", "1122", 30, "19A");
-        when(iClienteService.crearCliente(any())).thenReturn(DatosClienteControllerTest.crearCliente());
+        ClientDTO clienteDTO = DatosClienteTest.clienteDTO("Daniel", "1030", "1122", 30, "19A");
+        when(iClienteService.creatClient(any())).thenReturn(DatosClienteControllerTest.crearCliente());
 
         mvc.perform(post(url)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -60,7 +60,7 @@ class ClienteControllerTest {
     @Test
     void getClientes() throws Exception {
 
-        List<ClienteEntity> clienteDTOList = DatosClienteEntity
+        List<ClientEntity> clienteDTOList = DatosClienteEntity
                 .getListClientes(
                         DatosClienteEntity.getClienteEntity("Daniel",
                                 "1030",
@@ -69,7 +69,7 @@ class ClienteControllerTest {
                                 "19A",
                                 1l));
 
-        when(iClienteService.listarClientes()).thenReturn(DatosClienteControllerTest.listarClientes(clienteDTOList));
+        when(iClienteService.listClients()).thenReturn(DatosClienteControllerTest.listarClientes(clienteDTOList));
 
 
         mvc.perform(get(url)
@@ -84,7 +84,7 @@ class ClienteControllerTest {
     @Test
     void consultarUsuario() throws Exception {
 
-        ClienteEntity clienteEntity = DatosClienteEntity
+        ClientEntity clienteEntity = DatosClienteEntity
                 .getClienteEntity("Daniel",
                         "1030",
                         "1122",
@@ -92,7 +92,7 @@ class ClienteControllerTest {
                         "19A",
                         1l);
 
-        when(iClienteService.consultarClienteIdentificacion(anyString())).thenReturn(DatosClienteControllerTest.getCliente(clienteEntity));
+        when(iClienteService.getClientByIdentification(anyString())).thenReturn(DatosClienteControllerTest.getCliente(clienteEntity));
 
         mvc.perform(get(url + "/1030")
                         .contentType(MediaType.APPLICATION_JSON))
@@ -106,7 +106,7 @@ class ClienteControllerTest {
     @Test
     void eliminarCliente() throws Exception {
 
-        when(iClienteService.eliminarCliente(anyString())).thenReturn(DatosClienteControllerTest.getOkTransacction());
+        when(iClienteService.deleteClient(anyString())).thenReturn(DatosClienteControllerTest.getOkTransacction());
 
 
         mvc.perform(get(url + "/1030")
@@ -118,9 +118,9 @@ class ClienteControllerTest {
     @Test
     void updateCliente() throws Exception {
 
-        ClienteDTO clienteDTO = DatosClienteTest.clienteDTO("Daniel", "1030", "1122", 30, "19A");
+        ClientDTO clienteDTO = DatosClienteTest.clienteDTO("Daniel", "1030", "1122", 30, "19A");
 
-        when(iClienteService.actualizarCliente(anyString(),any())).thenReturn(DatosClienteControllerTest.getOkTransacction());
+        when(iClienteService.modifyClient(anyString(),any())).thenReturn(DatosClienteControllerTest.getOkTransacction());
 
 
         mvc.perform(get(url + "/1030")
