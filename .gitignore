@@ -48,5 +48,4 @@ Thumbs.db
 *.mov
 *.wmv
 
-src/main/resources/application-*.yml
 .vscode/
